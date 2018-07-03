@@ -1,0 +1,31 @@
+
+
+
+ version: '2'
+
+# based off compose-sample-2, only we build nginx.conf into image
+# uses sample site from https://startbootstrap.com/template-overviews/agency/
+
+ services:
+   drupal:
+     build: .
+     image: custom-drupal
+     ports:
+       - '8080:80'
+     volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+   postgres:
+    image: postgres:9.6
+    environment: 
+     - POSTGRES_PASSWORD=mypasswd
+    volumes:
+     - drupal-data:/var/lib/postgresql/data
+ volumes:
+  drupal-data:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
