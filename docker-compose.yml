@@ -13,10 +13,9 @@ services:
  postgres:
     image: postgres:9.6
     environment:
-     POSTGRES_PASSWORD=_FILE:
-      /run/secrets/psql-pw
+     - POSTGRES_PASSWORD_FILE=/run/secrets/psql-pw2
     secrets:
-     - psql-pw
+     - psql-pw2
     volumes:
      - drupal-data:/var/lib/postgresql/data
 volumes:
@@ -26,5 +25,5 @@ volumes:
  drupal-sites:
  drupal-themes:
 secrets:
- psql-pw:
+ psql-pw2:
   external: true
